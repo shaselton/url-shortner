@@ -6,7 +6,7 @@
 application_path = '/var/www/url-shortner/current'
 # railsenv = 'production'
 directory application_path
-environment railsenv
+# environment railsenv
 daemonize true
 pidfile "#{application_path}/tmp/pids/puma.pid"
 state_path "#{application_path}/tmp/pids/puma.state"
