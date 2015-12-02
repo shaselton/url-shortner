@@ -69,9 +69,9 @@ task :deploy => :environment do
     invoke :'whenever:update'
 
     to :launch do
-      queue "mkdir -p #{deploy_to}/#{current_path}/tmp/pids"
-      queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      queue "mkdir -p #{deploy_to}/#{current_path}/log"
+      queue "mkdir -p #{deploy_to}/current/tmp/pids"
+      queue "touch #{deploy_to}/current/tmp/restart.txt"
+      queue "mkdir -p #{deploy_to}/current/log"
     end
   end
 end
