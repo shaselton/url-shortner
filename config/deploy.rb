@@ -12,7 +12,7 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :user, 'root'
-set :domain, 'hase.io'
+set :domain, 'shaselton-url' #defined in my localhost file
 set :deploy_to, '/var/www/url-shortner'
 set :repository, 'git@github.com:shaselton/url-shortner.git'
 set :branch, 'master'
@@ -47,8 +47,8 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
 
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
@@ -66,12 +66,12 @@ task :deploy => :environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'deploy:cleanup'
-    invoke :'whenever:update'
+    # invoke :'whenever:update'
 
     to :launch do
-      queue "mkdir -p #{deploy_to}/current/tmp/pids"
-      queue "touch #{deploy_to}/current/tmp/restart.txt"
-      queue "mkdir -p #{deploy_to}/current/log"
+      queue "mkdir -p #{deploy_to}/#{current_path}/tmp/pids"
+      queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      queue "mkdir -p #{deploy_to}/#{current_path}/log"
     end
   end
 end

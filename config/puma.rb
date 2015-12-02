@@ -4,7 +4,7 @@
 # RAILS_ENV=production bundle exec puma -C ./config/puma.rb
 
 application_path = '/var/www/url-shortner/current'
-railsenv = 'development'
+# railsenv = 'production'
 directory application_path
 environment railsenv
 daemonize true
