@@ -4,7 +4,7 @@ gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'puma'
 gem 'mina'
-gem 'whenever'
+#gem 'whenever'
 
 group :development, :test do
   gem 'byebug'
