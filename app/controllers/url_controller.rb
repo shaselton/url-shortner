@@ -1,3 +1,5 @@
+require 'bijective'
+
 class UrlController < ApplicationController
 	 skip_before_filter :verify_authenticity_token, :only => [:index]
 	def show
