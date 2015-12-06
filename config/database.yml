@@ -27,5 +27,7 @@ test:
 
 production:
   <<: *prod
-  database: url_shortner
+  hostname: 127.0.0.1
+  username: url_shortner
+  database: url_shortner_production
   password: testing
