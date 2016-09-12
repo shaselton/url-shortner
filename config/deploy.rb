@@ -47,11 +47,14 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
 
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+
+  queue! %[mkdir -p  "#{deploy_to}/#{shared_path}/databases"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/databases"]
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
@@ -64,8 +67,10 @@ task :deploy => :environment do
     # instance of your project.
     invoke :'git:clone'
     invoke :'bundle:install'
+    invoke :'rails:db_create'  #initial creation on first deploy
     invoke :'rails:db_migrate'
     invoke :'deploy:cleanup'
+    # invoke :'deploy:link_shared_paths'
     # invoke :'whenever:update'
 
     to :launch do

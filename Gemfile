@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'puma'
 gem 'mina'
 gem 'pg'
+gem 'newrelic_rpm'
 #gem 'whenever'
 
 group :development, :test do
